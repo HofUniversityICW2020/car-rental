@@ -1,25 +1,7 @@
 <?php
-require_once './database.php';
+require_once '../vendor/autoload.php';
 
-class CarList
-{
-    public function getCars(): array
-    {
-        $database = new Database();
-        $connection = $database->connect();
-        $statement = $connection->prepare(
-            'SELECT * FROM `car` WHERE `available` = 1;'
-        );
-        $statement->execute();
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    public function getCarUri(string $vin): string
-    {
-        return sprintf('/car-detail.php?vin=%s&origin=car-list', $vin);
-    }
-}
-$carList = new CarList();
+$cars = \HofUniversityICW\CarRental\Domain\Car::findAll();
 ?>
 <!doctype html>
 <html lang="en">
@@ -76,31 +58,32 @@ $carList = new CarList();
     </div>
 
     <div class="container">
-<?php foreach ($carList->getCars() as $car) { ?>
+<?php foreach ($cars as $car) { ?>
         <div class="row">
             <div class="col-md-4">
-                <a href="<?php echo $carList->getCarUri($car['vin']); ?>">
-                    <img class="rounded-sm img-thumbnail" src="res/car/<?php echo $car['vin']; ?>.jpg">
+                <a href="<?php echo $car->getUri(); ?>">
+                    <img class="rounded-sm img-thumbnail" src="res/car/<?php echo $car->vin; ?>.jpg">
                 </a>
             </div>
             <div class="col-md-8">
                 <h4>
-                    <a href="<?php echo $carList->getCarUri($car['vin']); ?>">
-                        <?php echo $car['model']; ?>
+                    <a href="<?php echo $car->getUri(); ?>">
+                        <?php echo $car->model->name; ?>
                     </a>
                 </h4>
                 <p>
-                    Brand: <?php echo $car['brand'];?>
+                    Brand: <?php echo $car->model->brand->name;?>
                 </p>
                 <p>
-                    Engine: <?php echo $car['engine_name'];?>
-                    (<?php echo sprintf('%.2f', $car['engine_size']); ?> cbm, <?php echo $car['engine_power']; ?> hp)
+                    Engine: <?php echo $car->engine->name;?>
+                    (<?php echo sprintf('%.2f', $car->engine->size); ?> cbm, <?php echo $car->engine->power; ?> hp)
                 </p>
                 <p>
-                    Price: <?php echo sprintf('%.2f', $car['price']); ?> € per day
+                    <!-- @todo Still missing, did not implement Rate model yet -->
+                    Price: <?php echo sprintf('%.2f', 0); ?> € per day
                 </p>
                 <p>
-                    <span class="border" style="display: inline-block; width: 5rem; height: 5rem; background: #<?php echo $car['color']; ?>"><i></i></span>
+                    <span class="border" style="display: inline-block; width: 5rem; height: 5rem; background: #<?php echo $car->color->hex; ?>"><i></i></span>
                 </p>
             </div>
         </div>
