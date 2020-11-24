@@ -1,0 +1,17 @@
+{
+    "name": "hof-university-icw/car-rental",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Oliver Hader",
+            "email": "oliver@typo3.org"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "HofUniversityICW\\CarRental\\": "src/"
+        }
+    }
+}
