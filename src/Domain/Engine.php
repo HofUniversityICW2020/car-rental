@@ -43,9 +43,9 @@ class Engine
         $statement = Database::getInstance()
             ->getConnection()
             ->prepare(
-                'SELECT * FROM `engine` WHERE `car`=' . $car
+                'SELECT * FROM `engine` WHERE `car`=:car;'
             );
-        $statement->execute();
+        $statement->execute(['car' => $car]);
         $item = $statement->fetch(\PDO::FETCH_ASSOC);
         if (empty($item)) {
             return null;

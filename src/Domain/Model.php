@@ -25,9 +25,9 @@ class Model
         $statement = Database::getInstance()
             ->getConnection()
             ->prepare(
-                'SELECT * FROM `model` WHERE `id`=' . $id
+                'SELECT * FROM `model` WHERE `id`=:id;'
             );
-        $statement->execute();
+        $statement->execute(['id' => $id]);
         $item = $statement->fetch(\PDO::FETCH_ASSOC);
         if (empty($item)) {
             return null;
