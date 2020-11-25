@@ -1,7 +1,7 @@
 @php
 $navItems = [
     'index' => 'Home',
-    'car-list' => 'Cars',
+    'cars' => 'Cars',
     'contact' => 'Contact',
 ];
 @endphp
@@ -11,11 +11,11 @@ $navItems = [
         @foreach ($navItems as $navItem => $navTitle)
             @if ($navItem === $currentNavItem)
                 <li class="nav-item active">
-                    <a class="nav-link" href="/{{ $navItem }}.php">{{ $navTitle }} <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/{{ $navItem }}">{{ $navTitle }} <span class="sr-only">(current)</span></a>
                 </li>
             @else
                 <li class="nav-item">
-                    <a class="nav-link" href="/{{ $navItem }}.php">{{ $navTitle }}</a>
+                    <a class="nav-link" href="/{{ $navItem }}">{{ $navTitle }}</a>
                 </li>
             @endif
         @endforeach

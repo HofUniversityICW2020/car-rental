@@ -21,7 +21,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <a href="<?php echo $car->getUri($origin); ?>">
-                        <img class="rounded-sm img-thumbnail" src="res/car/<?php echo $car->vin; ?>.jpg">
+                        <img class="rounded-sm img-thumbnail" src="/res/car/<?php echo $car->vin; ?>.jpg">
                     </a>
                 </div>
                 <div class="col-md-8">

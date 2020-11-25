@@ -13,22 +13,22 @@ class CarController
         $view = new TemplateView();
         $view->assignVariables([
             'cars' => $cars,
-            'origin' => 'car-list',
+            'origin' => 'cars',
             'pageTitle' => 'Car List',
-            'currentNavItem' => 'car-list',
+            'currentNavItem' => 'cars',
         ]);
         return $view->render('car-list');
     }
 
-    public function detailAction(int $car): string
+    public function detailAction(int $car, string $origin): string
     {
         $car = Car::findById($car);
         $view = new TemplateView();
         $view->assignVariables([
             'car' => $car,
-            'origin' => $_GET['origin'],
+            'origin' => $origin,
             'pageTitle' => $car->model->name,
-            'currentNavItem' => 'car-list',
+            'currentNavItem' => 'cars',
         ]);
         return $view->render('car-detail');
     }

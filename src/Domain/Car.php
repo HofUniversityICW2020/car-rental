@@ -87,13 +87,13 @@ class Car
 
     public function getUri(string $origin = null): string
     {
-        $parameters = ['car' => $this->id];
+        $parameters = [$this->id];
         if ($origin !== null) {
-            $parameters['origin'] = $origin;
+            $parameters[] = $origin;
         }
         return sprintf(
-            '/car-detail.php?%s',
-            http_build_query($parameters, '', '&', PHP_QUERY_RFC3986)
+            '/car/%s', // /car/123, /car/123/cars
+            implode('/', $parameters)
         );
     }
 }
