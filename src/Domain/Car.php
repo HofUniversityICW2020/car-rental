@@ -58,6 +58,21 @@ class Car
         );
     }
 
+    public static function findById(int $id): ?Car
+    {
+        $statement = Database::getInstance()
+            ->getConnection()
+            ->prepare(
+                'SELECT * FROM `car` WHERE `id`=' . $id
+            );
+        $statement->execute();
+        $item = $statement->fetch(\PDO::FETCH_ASSOC);
+        if (empty($item)) {
+            return null;
+        }
+        return self::buildFromArray($item);
+    }
+
     private static function buildFromArray(array $item): Car
     {
         $car = new Car();

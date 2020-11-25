@@ -1,22 +1,6 @@
 <?php
-require_once './database.php';
-
-class CarDetail
-{
-    public function getCar($vin): array
-    {
-        $database = new Database();
-        $connection = $database->connect();
-        // @todo: Carefully... good, in case you spotted something here
-        $statement = $connection->prepare(
-            'SELECT * FROM `car` WHERE `vin` = "' . $vin . '";'
-        );
-        $statement->execute();
-        return $statement->fetch(PDO::FETCH_ASSOC);
-    }
-}
-$carDetail = new CarDetail();
-$car = $carDetail->getCar($_GET['vin']);
+require_once '../vendor/autoload.php';
+$car = \HofUniversityICW\CarRental\Domain\Car::findById($_GET['car']);
 ?>
 <!doctype html>
 <html lang="en">
@@ -62,7 +46,7 @@ $car = $carDetail->getCar($_GET['vin']);
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
         <div class="container">
-            <h1 class="display-3"><?php echo $car['brand'] . ' ' . $car['model']; ?></h1>
+            <h1 class="display-3"><?php echo $car->model->brand->name . ' ' . $car->model->name; ?></h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla aliquet cursus blandit. Mauris aliquet leo
                 nulla, quis egestas magna feugiat nec. Curabitur iaculis convallis ex, non lobortis diam dignissim eu.
                 Cras lectus lacus, egestas et hendrerit sed, condimentum sed eros. Proin ultricies dui ipsum, id ornare
@@ -74,30 +58,29 @@ $car = $carDetail->getCar($_GET['vin']);
     </div>
 
     <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <img class="rounded-sm img-thumbnail" src="res/car/<?php echo $car['vin']; ?>.jpg">
-                </div>
-                <div class="col-md-8">
-                    <h4>
-                        <?php echo $car['model']; ?>
-                    </h4>
-                    <p>
-                        Brand: <?php echo $car['brand'];?>
-                    </p>
-                    <p>
-                        Engine: <?php echo $car['engine_name'];?>
-                        (<?php echo sprintf('%.2f', $car['engine_size']); ?> cbm, <?php echo $car['engine_power']; ?> hp)
-                    </p>
-                    <p>
-                        Price: <?php echo sprintf('%.2f', $car['price']); ?> € per day
-                    </p>
-                    <p>
-                        <span class="border" style="display: inline-block; width: 5rem; height: 5rem; background: #<?php echo $car['color']; ?>"><i></i></span>
-                    </p>
-                </div>
+        <div class="row">
+            <div class="col-md-4">
+                <img class="rounded-sm img-thumbnail" src="res/car/<?php echo $car->vin; ?>.jpg">
             </div>
-            <hr>
+            <div class="col-md-8">
+                <h4>
+                    <?php echo $car->model->name; ?>
+                </h4>
+                <p>
+                    Brand: <?php echo $car->model->brand->name;?>
+                </p>
+                <p>
+                    Engine: <?php echo $car->engine->name;?>
+                    (<?php echo sprintf('%.2f', $car->engine->size); ?> cbm, <?php echo $car->engine->power; ?> hp)
+                </p>
+                <p>
+                    Price: <?php echo sprintf('%.2f', $car->price); ?> € per day
+                </p>
+                <p>
+                    <span class="border" style="display: inline-block; width: 5rem; height: 5rem; background: #<?php echo $car->color->hex; ?>"><i></i></span>
+                </p>
+            </div>
+        </div>
     </div>
 </main>
 
