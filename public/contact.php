@@ -1,8 +1,4 @@
 <?php
 require_once '../vendor/autoload.php';
-$view = new \HofUniversityICW\CarRental\Presentation\TemplateView();
-$view->assignVariables([
-    'pageTitle' => 'Contact',
-    'currentNavItem' => 'contact',
-]);
-echo $view->render('contact');
+$controller = new \HofUniversityICW\CarRental\Application\ContactController();
+echo $controller->indexAction();
