@@ -8,7 +8,9 @@
             "email": "oliver@typo3.org"
         }
     ],
-    "require": {},
+    "require": {
+        "duncan3dc/blade": "^4.10"
+    },
     "autoload": {
         "psr-4": {
             "HofUniversityICW\\CarRental\\": "src/"
