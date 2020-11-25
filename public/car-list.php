@@ -1,7 +1,7 @@
 <?php
 require_once '../vendor/autoload.php';
-
 $cars = \HofUniversityICW\CarRental\Domain\Car::findAll();
+$origin = 'car-list';
 ?>
 <!doctype html>
 <html lang="en">
@@ -61,13 +61,13 @@ $cars = \HofUniversityICW\CarRental\Domain\Car::findAll();
 <?php foreach ($cars as $car) { ?>
         <div class="row">
             <div class="col-md-4">
-                <a href="<?php echo $car->getUri(); ?>">
+                <a href="<?php echo $car->getUri($origin); ?>">
                     <img class="rounded-sm img-thumbnail" src="res/car/<?php echo $car->vin; ?>.jpg">
                 </a>
             </div>
             <div class="col-md-8">
                 <h4>
-                    <a href="<?php echo $car->getUri(); ?>">
+                    <a href="<?php echo $car->getUri($origin); ?>">
                         <?php echo $car->model->name; ?>
                     </a>
                 </h4>

@@ -63,8 +63,15 @@ class Car
         return $car;
     }
 
-    public function getUri(): string
+    public function getUri(string $origin = null): string
     {
-        return sprintf('/car-detail.php?vin=%s&origin=car-list', $this->vin);
+        $parameters = ['car' => $this->id];
+        if ($origin !== null) {
+            $parameters['origin'] = $origin;
+        }
+        return sprintf(
+            '/car-detail.php?%s',
+            http_build_query($parameters, '', '&', PHP_QUERY_RFC3986)
+        );
     }
 }
