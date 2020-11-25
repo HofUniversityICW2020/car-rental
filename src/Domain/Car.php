@@ -16,6 +16,12 @@ class Car
     public $vin;
 
     /**
+     * @var float
+     * @todo Shall be substituted with `Rate` model (multiple rates)
+     */
+    public $price;
+
+    /**
      * @var Model
      */
     public $model;
@@ -57,6 +63,7 @@ class Car
         $car = new Car();
         $car->id = $item['id'];
         $car->vin = $item['vin'];
+        $car->price = $item['price'];
         $car->color = Color::findById($item['color']);
         $car->model = Model::findById($item['model']);
         $car->engine = Engine::findByCar($car->id);

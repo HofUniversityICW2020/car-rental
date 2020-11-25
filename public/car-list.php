@@ -79,8 +79,7 @@ $origin = 'car-list';
                     (<?php echo sprintf('%.2f', $car->engine->size); ?> cbm, <?php echo $car->engine->power; ?> hp)
                 </p>
                 <p>
-                    <!-- @todo Still missing, did not implement Rate model yet -->
-                    Price: <?php echo sprintf('%.2f', 0); ?> € per day
+                    Price: <?php echo sprintf('%.2f', $car->price); ?> € per day
                 </p>
                 <p>
                     <span class="border" style="display: inline-block; width: 5rem; height: 5rem; background: #<?php echo $car->color->hex; ?>"><i></i></span>
