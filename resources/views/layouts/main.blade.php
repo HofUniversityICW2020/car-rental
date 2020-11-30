@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/res/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
     <title>{{ $pageTitle }} - Car Rental Inc.</title>
 </head>
@@ -31,5 +31,6 @@
 <footer class="container">
     <p>&copy; Car Rental Inc. 2020</p>
 </footer>
+<script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

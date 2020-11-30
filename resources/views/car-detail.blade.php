@@ -9,7 +9,7 @@
                 Cras lectus lacus, egestas et hendrerit sed, condimentum sed eros. Proin ultricies dui ipsum, id ornare
                 libero euismod elementum. Proin viverra nulla a elit accumsan imperdiet. Praesent viverra eleifend
                 vulputate.</p>
-            <p><a class="btn btn-primary btn-sm" href="/{{ $origin }}" role="button">&laquo; back</a></p>
+            <p><a class="btn btn-primary btn-sm" href="{{ route($originRouteName) }}" role="button">&laquo; back</a></p>
         </div>
     </div>
 @endsection
@@ -19,7 +19,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-                <img class="rounded-sm img-thumbnail" src="/res/car/<?php echo $car->vin; ?>.jpg">
+                <img class="rounded-sm img-thumbnail" src="{{ asset('images/' . $car->vin . '.jpg') }}">
             </div>
             <div class="col-md-8">
                 <h4>

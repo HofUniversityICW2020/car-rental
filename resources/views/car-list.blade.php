@@ -20,13 +20,13 @@
             @foreach ($cars as $car)
             <div class="row">
                 <div class="col-md-4">
-                    <a href="<?php echo $car->getUri($origin); ?>">
-                        <img class="rounded-sm img-thumbnail" src="/res/car/<?php echo $car->vin; ?>.jpg">
+                    <a href="{{ route('car-detail', [$car->id, $currentRouteName]) }}">
+                        <img class="rounded-sm img-thumbnail" src="{{ asset('images/' . $car->vin . '.jpg') }}">
                     </a>
                 </div>
                 <div class="col-md-8">
                     <h4>
-                        <a href="<?php echo $car->getUri($origin); ?>">
+                        <a href="{{ route('car-detail', [$car->id, $currentRouteName]) }}">
                             <?php echo $car->model->name; ?>
                         </a>
                     </h4>
