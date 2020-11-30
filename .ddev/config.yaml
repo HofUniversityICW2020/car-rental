@@ -1,5 +1,5 @@
 name: car-rental
-type: php
+type: laravel
 docroot: public
 php_version: "7.3"
 webserver_type: nginx-fpm
